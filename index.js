@@ -19,14 +19,6 @@ bot.start((ctx) => {
     ctx.reply(text.START)
 })
 
-bot.command('contribute', (ctx) => {
-    ctx.reply(text.CONTRIBUTE, {
-                "reply_markup":{
-                        "inline_keyboard": [[{"text":"Open GitHub", "url": 'https://github.com/Shiyinq/anonim-chat'}]]
-                }
-        })
-})
-
 bot.command('help', (ctx) => {
     ctx.reply(text.HELP)
 })
