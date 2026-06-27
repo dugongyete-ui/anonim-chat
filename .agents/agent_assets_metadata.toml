@@ -6,8 +6,20 @@ uri = "file://attached_assets/logo.png"
 type = "image"
 title = "generated_image"
 
+[[generated]]
+id = "ZpTYPK-lKNhiddNIyoQc1"
+uri = "file://attached_assets/grup_logo.png"
+type = "image"
+title = "anonim chat grup logo"
+
 [[outputs]]
 id = "qvnWwt0UbPIMsDn-Ne1gc"
 uri = "file://attached_assets/logo.png"
 type = "image"
 title = "Logo Anonim Chat Bot"
+
+[[outputs]]
+id = "jvpSMAJRyC38dLqgslPmd"
+uri = "file://attached_assets/grup_logo.png"
+type = "image"
+title = "Logo Grup @caritemanonline_idn"
