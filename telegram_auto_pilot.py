@@ -10,6 +10,7 @@ from telethon.errors.rpcerrorlist import (
     UserNotMutualContactError,
     UserBannedInChannelError,
     ChatWriteForbiddenError,
+    UserAlreadyParticipantError,
 )
 from telethon.tl.functions.channels import InviteToChannelRequest
 import time
@@ -114,6 +115,10 @@ async def main():
             print("\n🚫 PeerFloodError: Akun terkena pembatasan Telegram.")
             print("   Hentikan skrip dan tunggu minimal 24–48 jam sebelum mencoba lagi.")
             break
+
+        except UserAlreadyParticipantError:
+            skip_count += 1
+            print(f"   SKIP (sudah di grup): @{user.username}")
 
         except UserPrivacyRestrictedError:
             skip_count += 1
