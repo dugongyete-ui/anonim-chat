@@ -54,6 +54,47 @@ bot.command('users', (ctx) => {
     Matchmaker.currentActiveUser(id)
 })
 
+bot.command('broadcast', async (ctx) => {
+    const adminId = parseInt(process.env.ADMIN_ID)
+    const senderId = ctx.message.from.id
+
+    if (senderId !== adminId) {
+        return ctx.reply('⛔ Kamu tidak memiliki akses perintah ini.')
+    }
+
+    const pesan = ctx.message.text.replace('/broadcast', '').trim()
+    if (!pesan) {
+        return ctx.reply('⚠️ Format: /broadcast <pesan>\n\nContoh: /broadcast Server akan maintenance jam 10 malam.')
+    }
+
+    const { Telegram } = require('telegraf')
+    const tg = new Telegram(process.env.BOT_TOKEN)
+
+    const Queue = require('./src/models/Queue')
+    const Room = require('./src/models/Room')
+
+    const queues = await Queue.find({})
+    const rooms = await Room.find({})
+
+    const semuaId = new Set()
+    queues.forEach(q => semuaId.add(q.user_id))
+    rooms.forEach(r => r.participans.forEach(id => semuaId.add(id)))
+
+    let berhasil = 0
+    let gagal = 0
+
+    for (const userId of semuaId) {
+        try {
+            await tg.sendMessage(userId, `📢 *Pesan dari Admin:*\n\n${pesan}`, { parse_mode: 'Markdown' })
+            berhasil++
+        } catch (err) {
+            gagal++
+        }
+    }
+
+    ctx.reply(`✅ Broadcast selesai.\n\nTerkirim: ${berhasil}\nGagal: ${gagal}`)
+})
+
 bot.on('text', (ctx) => {
     let id = ctx.message.chat.id
     let message = ctx.message
