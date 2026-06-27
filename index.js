@@ -1,7 +1,7 @@
 require('dotenv').config()
 require('./src/config/database')
 
-const text = require(`./src/config/lang/${process.env.LANGUAGE}`)
+const text = require(`./src/config/lang/${process.env.LANGUAGE || 'EN'}`)
 
 const express = require('express')
 const app = express()
@@ -21,10 +21,10 @@ bot.start((ctx) => {
 
 bot.command('contribute', (ctx) => {
     ctx.reply(text.CONTRIBUTE, {
-		"reply_markup":{
-			"inline_keyboard": [[{"text":"Open GitHub", "url": 'https://github.com/Shiyinq/anonim-chat'}]]
-		}
-	})
+                "reply_markup":{
+                        "inline_keyboard": [[{"text":"Open GitHub", "url": 'https://github.com/Shiyinq/anonim-chat'}]]
+                }
+        })
 })
 
 bot.command('help', (ctx) => {
@@ -113,8 +113,8 @@ bot.on('callback_query', (ctx) => {
 
 bot.launch()
 
-app.get('/', (req, res) => res.send("Hello World!"))
+app.get('/', (req, res) => res.send("Anonim Chat Bot is running!"))
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Express server listening at http://0.0.0.0:${port}`)
 })

@@ -4,16 +4,14 @@
   "description": "Anonymous Chat",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
     "start": "node index.js"
   },
   "author": "Shiyinq",
   "license": "GPL-3.0",
   "dependencies": {
-    "dotenv": "^10.0.0",
+    "dotenv": "^16.0.0",
     "express": "^4.17.1",
-    "mongodb": "^3.6.9",
-    "mongoose": "^5.12.14",
+    "mongoose": "^8.0.0",
     "telegraf": "^4.3.0"
   }
 }
