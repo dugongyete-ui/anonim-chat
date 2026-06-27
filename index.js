@@ -21,6 +21,10 @@ bot.command('help', (ctx) => {
     ctx.reply(text.HELP)
 })
 
+bot.command('group', (ctx) => {
+    ctx.reply(text.GROUP, { parse_mode: 'Markdown', disable_web_page_preview: true })
+})
+
 bot.command('ping', (ctx) => {
     const start = new Date()
     const s = start / 1000 - ctx.message.date

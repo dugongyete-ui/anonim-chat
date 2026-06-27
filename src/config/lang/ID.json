@@ -1,6 +1,7 @@
 {
-        "START": "Selamat Datang di Anonim Chat\n\n/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini",
-        "HELP": "/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini",
+        "START": "Selamat Datang di Anonim Chat 🎭\n\n/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini\n/group bergabung ke grup komunitas",
+        "HELP": "/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini\n/group bergabung ke grup komunitas",
+        "GROUP": "👥 *Grup Komunitas Anonim Chat*\n\nBergabunglah ke grup kami untuk:\n• Diskusi & ngobrol bareng member lain\n• Info update & fitur terbaru\n• Lapor bug atau saran\n\n🔗 https://t.me/caritemanonline_idn",
         "CONTRIBUTE": "Untuk teman\" jika ingin berkontribusi untuk botnya\n\nseperti: \n- menambah fitur\n- lapor bug\n- dll\n\nbisa pull request atau buat issue di GitHub",
         "PING": "Pongg 🏓",
         "CREATE_ROOM": {
