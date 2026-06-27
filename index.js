@@ -7,13 +7,11 @@ const express = require('express')
 const app = express()
 const port = process.env.PORT || 5000
 
-const { Telegraf} = require('telegraf')
+const { Telegraf } = require('telegraf')
 const bot = new Telegraf(process.env.BOT_TOKEN)
 
 const MatchMaker = require('./src/matchmaker')
 let Matchmaker = new MatchMaker()
-
-Matchmaker.init()
 
 bot.start((ctx) => {
     ctx.reply(text.START)
@@ -34,7 +32,7 @@ bot.command('find', (ctx) => {
     Matchmaker.find(id)
 })
 
-bot.command('next', (ctx) => { 
+bot.command('next', (ctx) => {
     let id = ctx.message.chat.id
     Matchmaker.next(id)
 })
@@ -128,26 +126,37 @@ bot.on('video', (ctx) => {
 
 bot.on('callback_query', (ctx) => {
     let query = ctx.callbackQuery.data.split('-')
-  
+
     switch (query[0]) {
         case 'openPhoto':
             let urlPhoto = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/photos/${query[1]}`
-            ctx.deleteMessage().then(ctx.replyWithPhoto({url: urlPhoto})).catch(err => console.log(err))
-            break;
+            ctx.deleteMessage().then(ctx.replyWithPhoto({ url: urlPhoto })).catch(err => console.log(err))
+            break
         case 'openVideo':
             let urlVideo = `https://api.telegram.org/file/bot${process.env.BOT_TOKEN}/videos/${query[1]}`
-            ctx.deleteMessage().then(ctx.replyWithVideo({url: urlVideo})).catch(err => console.log(err))
-            break;
+            ctx.deleteMessage().then(ctx.replyWithVideo({ url: urlVideo })).catch(err => console.log(err))
+            break
         default:
             console.log('unknown')
-            break;
+            break
     }
 })
 
-bot.launch()
+const webhookPath = `/webhook/${bot.secretPathComponent()}`
+const domain = process.env.WEBHOOK_DOMAIN || process.env.REPLIT_DEV_DOMAIN
 
-app.get('/', (req, res) => res.send("Anonim Chat Bot is running!"))
+app.use(bot.webhookCallback(webhookPath))
+
+app.get('/', (req, res) => res.send('Anonim Chat Bot is running!'))
 
 app.listen(port, '0.0.0.0', () => {
-  console.log(`Express server listening at http://0.0.0.0:${port}`)
+    console.log(`Express server listening at http://0.0.0.0:${port}`)
+    if (domain) {
+        const webhookUrl = `https://${domain}${webhookPath}`
+        bot.telegram.setWebhook(webhookUrl)
+            .then(() => console.log(`✔ Webhook aktif: ${webhookUrl}`))
+            .catch(err => console.error('✘ Webhook error:', err.message))
+    } else {
+        console.warn('⚠ WEBHOOK_DOMAIN tidak diset, bot tidak akan menerima pesan')
+    }
 })

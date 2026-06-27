@@ -9,22 +9,17 @@ const { Markup } = require('telegraf')
 const text = require(`./config/lang/${process.env.LANGUAGE || 'EN'}`)
 
 class MatchMaker {
-    init() {
-        setInterval(async () => {
-            try {
-                const queues = await Queue.find({}).limit(2)
-                if (queues.length == 2) {
-                    let newParticipan = []
-                    for (const q of queues) {
-                        await Queue.deleteOne({ user_id: q.user_id })
-                        newParticipan.push(q.user_id)
-                    }
-                    this.createRoom(newParticipan)
-                }
-            } catch (err) {
-                console.log(err)
+
+    async #tryMatch() {
+        const queues = await Queue.find({}).limit(2)
+        if (queues.length >= 2) {
+            const newParticipan = []
+            for (const q of queues) {
+                await Queue.deleteOne({ user_id: q.user_id })
+                newParticipan.push(q.user_id)
             }
-        }, 2000)
+            await this.createRoom(newParticipan)
+        }
     }
 
     async createRoom(newParticipan) {
@@ -45,17 +40,20 @@ class MatchMaker {
             const inQueue = await Queue.find({ user_id: userID })
             if (inQueue.length > 0) {
                 tg.sendMessage(userID, text.FIND.WARNING_1)
-            } else {
-                const inRoom = await Room.find({ participans: userID })
-                if (inRoom.length > 0) {
-                    tg.sendMessage(userID, text.FIND.WARNING_2)
-                } else {
-                    tg.sendMessage(userID, text.FIND.LOADING)
-                    let queue = new Queue({ user_id: userID })
-                    const data = await queue.save()
-                    console.log(data)
-                }
+                return
             }
+
+            const inRoom = await Room.find({ participans: userID })
+            if (inRoom.length > 0) {
+                tg.sendMessage(userID, text.FIND.WARNING_2)
+                return
+            }
+
+            tg.sendMessage(userID, text.FIND.LOADING)
+            let queue = new Queue({ user_id: userID })
+            await queue.save()
+
+            await this.#tryMatch()
         } catch (err) {
             console.log(err)
         }
@@ -157,7 +155,7 @@ class MatchMaker {
                                 let photoName = url.pathname.split('/photos/')[1]
                                 tg.sendMessage(partnerID, text.USER_SEND_PHOTO.WARNING_1,
                                     Markup.inlineKeyboard([
-                                        [Markup.button.callback('Open', 'openPhoto-' + String(photoName))],
+                                        [Markup.button.callback('Buka', 'openPhoto-' + String(photoName))],
                                     ])
                                 ).catch(err => this.#errorWhenRoomActive(err, userID))
                             }).catch(err => console.log(err))
@@ -168,7 +166,7 @@ class MatchMaker {
                                 let videoName = url.pathname.split('/videos/')[1]
                                 tg.sendMessage(partnerID, text.USER_SEND_VIDEO.WARNING_1,
                                     Markup.inlineKeyboard([
-                                        [Markup.button.callback('Open', 'openVideo-' + String(videoName))],
+                                        [Markup.button.callback('Buka', 'openVideo-' + String(videoName))],
                                     ])
                                 ).catch(err => this.#errorWhenRoomActive(err, userID))
                             }).catch(err => console.log(err))
