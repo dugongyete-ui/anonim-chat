@@ -142,21 +142,47 @@ bot.on('callback_query', (ctx) => {
     }
 })
 
-const webhookPath = `/webhook/${bot.secretPathComponent()}`
-const domain = process.env.WEBHOOK_DOMAIN || process.env.REPLIT_DEV_DOMAIN
+const WEBHOOK_PATH = '/telegram/webhook'
 
-app.use(bot.webhookCallback(webhookPath))
+function buildWebhookUrl() {
+    if (process.env.WEBHOOK_DOMAIN) {
+        return `https://${process.env.WEBHOOK_DOMAIN}${WEBHOOK_PATH}`
+    }
+    if (process.env.REPLIT_DEPLOYMENT === '1' && process.env.REPLIT_DOMAINS) {
+        const domain = process.env.REPLIT_DOMAINS.split(',')[0].trim()
+        return `https://${domain}${WEBHOOK_PATH}`
+    }
+    return null
+}
+
+async function registerWebhook() {
+    const webhookUrl = buildWebhookUrl()
+    if (!webhookUrl) {
+        console.log('Dev environment — webhook tidak didaftarkan otomatis. Gunakan polling atau set WEBHOOK_DOMAIN.')
+        bot.launch()
+        console.log('✔ Bot berjalan dengan mode polling (dev)')
+        return
+    }
+    try {
+        await bot.telegram.setWebhook(webhookUrl)
+        console.log(`✔ Webhook aktif: ${webhookUrl}`)
+    } catch (err) {
+        console.error('✘ Gagal daftar webhook:', err.message)
+    }
+}
+
+app.use(express.json())
+
+app.post(WEBHOOK_PATH, (req, res) => {
+    res.sendStatus(200)
+    const update = req.body
+    if (!update || !update.update_id) return
+    bot.handleUpdate(update).catch(err => console.error('Error handleUpdate:', err))
+})
 
 app.get('/', (req, res) => res.send('Anonim Chat Bot is running!'))
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Express server listening at http://0.0.0.0:${port}`)
-    if (domain) {
-        const webhookUrl = `https://${domain}${webhookPath}`
-        bot.telegram.setWebhook(webhookUrl)
-            .then(() => console.log(`✔ Webhook aktif: ${webhookUrl}`))
-            .catch(err => console.error('✘ Webhook error:', err.message))
-    } else {
-        console.warn('⚠ WEBHOOK_DOMAIN tidak diset, bot tidak akan menerima pesan')
-    }
+    registerWebhook()
 })
