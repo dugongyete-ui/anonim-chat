@@ -1,39 +1,39 @@
 {
-	"START": "Selamat Datang di Anonim Chat\n\n/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini\n\n/contribute ikut berkontibusi ke project/lapor bug",
-	"HELP": "/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/contribute ikut berkontibusi ke project/lapor bug",
-	"CONTRIBUTE": "Untuk teman\" jika ingin berkontribusi untuk botnya\n\nseperti: \n- menambah fitur\n- lapor bug\n- dll\n\nbisa pull request atau buat issue di GitHub",
-	"PING": "Pongg 🏓",
-	"CREATE_ROOM": {
-		"SUCCESS_1": "Teman chat ditemukan"
-	},
-	"FIND": {
-		"WARNING_1": "Kamu sedang berada di Antrian",
-		"WARNING_2": "Kamu sedang ada didalam chat",
-		"LOADING": "Sedang mencari teman..."
-	},
-	"NEXT": {
-		"SUCCESS_1": "Telah berhenti dari percakapan",
-		"SUCCESS_2": "Temanmu memberhentikan percakapan",
-		"WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
-	},
-	"STOP": {
-		"SUCCESS_1": "Telah berhenti dari percakapan",
-		"SUCCESS_2": "Temanmu memberhentikan percakapan",
-		"WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
-	},
-	"EXIT": {
-		"SUCCESS_1": "Mencari teman chat dihentikan",
-		"WARNING_1": "Kamu tidak dalam antrian"
-	},
-	"CONNECT": {
-		"WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
-	},
-	"USER_SEND_PHOTO": {
-		"WARNING_1": "ℹ️INFO \nTeman kamu mengirimkan foto, ingin membukanya?\n\n⚠️PERHATIAN! \nMungkin foto yang dikirimkan tidak sepantasnya untuk dilihat"
-	},
-	"USER_SEND_VIDEO": {
-		"WARNING_1": "ℹ️INFO \nTeman kamu mengirimkan vidio, ingin membukanya?\n\n⚠️PERHATIAN! \nMungkin vidio yang dikirimkan tidak sepantasnya untuk dilihat"
-	},
-	"ACTIVE_USER": "Saat ini, ada ${totalUser} orang yang menggunakan anonim-chat.\n\nAntrian: ${totalUserInQueue}\nPercakapan: ${totalUserInRoom}",
-	"ERROR": "Error"
+        "START": "Selamat Datang di Anonim Chat\n\n/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini",
+        "HELP": "/find mencari teman chat\n/next berhenti dari chat dan mencari teman lain\n/stop berhenti dari chat\n/exit berhenti mencari teman chat\n\n/ping mengecek status bot\n/users jumlah aktif user saat ini",
+        "CONTRIBUTE": "Untuk teman\" jika ingin berkontribusi untuk botnya\n\nseperti: \n- menambah fitur\n- lapor bug\n- dll\n\nbisa pull request atau buat issue di GitHub",
+        "PING": "Pongg 🏓",
+        "CREATE_ROOM": {
+                "SUCCESS_1": "Teman chat ditemukan"
+        },
+        "FIND": {
+                "WARNING_1": "Kamu sedang berada di Antrian",
+                "WARNING_2": "Kamu sedang ada didalam chat",
+                "LOADING": "Sedang mencari teman..."
+        },
+        "NEXT": {
+                "SUCCESS_1": "Telah berhenti dari percakapan",
+                "SUCCESS_2": "Temanmu memberhentikan percakapan",
+                "WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
+        },
+        "STOP": {
+                "SUCCESS_1": "Telah berhenti dari percakapan",
+                "SUCCESS_2": "Temanmu memberhentikan percakapan",
+                "WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
+        },
+        "EXIT": {
+                "SUCCESS_1": "Mencari teman chat dihentikan",
+                "WARNING_1": "Kamu tidak dalam antrian"
+        },
+        "CONNECT": {
+                "WARNING_1": "Kamu tidak punya teman chat\n\n/find untuk mencari teman chat"
+        },
+        "USER_SEND_PHOTO": {
+                "WARNING_1": "ℹ️INFO \nTeman kamu mengirimkan foto, ingin membukanya?\n\n⚠️PERHATIAN! \nMungkin foto yang dikirimkan tidak sepantasnya untuk dilihat"
+        },
+        "USER_SEND_VIDEO": {
+                "WARNING_1": "ℹ️INFO \nTeman kamu mengirimkan vidio, ingin membukanya?\n\n⚠️PERHATIAN! \nMungkin vidio yang dikirimkan tidak sepantasnya untuk dilihat"
+        },
+        "ACTIVE_USER": "Saat ini, ada ${totalUser} orang yang menggunakan anonim-chat.\n\nAntrian: ${totalUserInQueue}\nPercakapan: ${totalUserInRoom}",
+        "ERROR": "Error"
 }
