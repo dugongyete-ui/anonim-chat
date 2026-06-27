@@ -22,7 +22,6 @@ api_hash = 'a2732d77a9abc513db065170f563a603'
 phone    = '+6285962694573'
 
 # --- Batas keamanan --- #
-MAX_PER_SESSION  = 10    # Maksimal tambah per sekali jalan (turunkan jika masih kena ban)
 BATCH_SIZE       = 5     # Setelah berapa penambahan, ambil jeda panjang
 BATCH_REST_MIN   = 300   # Jeda panjang minimum setelah 1 batch (detik) = 5 menit
 BATCH_REST_MAX   = 600   # Jeda panjang maksimum setelah 1 batch (detik) = 10 menit
@@ -80,28 +79,24 @@ async def main():
 
     # ── TAHAP 3: PENAMBAHAN ────────────────────────────────────────────────
     print(f"\n[3] TAHAP PENAMBAHAN (Grup Tujuan: {my_group.title})")
-    print(f"Batas sesi ini   : {MAX_PER_SESSION} orang")
+    print(f"Mode             : Unlimited (semua kandidat)")
     print(f"Jeda antar tambah: {DELAY_MIN}–{DELAY_MAX} detik")
     print(f"Jeda antar batch : {BATCH_REST_MIN//60}–{BATCH_REST_MAX//60} menit (setiap {BATCH_SIZE} orang)\n")
 
     added_count = 0
     skip_count  = 0
+    total       = len(candidates)
 
     for user in candidates:
-        if added_count >= MAX_PER_SESSION:
-            print(f"\n✅ Batas sesi ({MAX_PER_SESSION} orang) tercapai.")
-            print("Jalankan lagi besok atau beberapa jam lagi untuk melanjutkan.")
-            break
-
         try:
             user_to_add = InputPeerUser(user.id, user.access_hash)
             await client(InviteToChannelRequest(my_group, [user_to_add]))
 
             added_count += 1
-            print(f"[{added_count}/{MAX_PER_SESSION}] ✔ Ditambahkan: {user.first_name or ''} (@{user.username})")
+            print(f"[{added_count}/{total}] ✔ Ditambahkan: {user.first_name or ''} (@{user.username})")
 
             # Jeda panjang setiap BATCH_SIZE penambahan
-            if added_count % BATCH_SIZE == 0 and added_count < MAX_PER_SESSION:
+            if added_count % BATCH_SIZE == 0:
                 rest = random.randint(BATCH_REST_MIN, BATCH_REST_MAX)
                 print(f"\n⏸  Istirahat batch — menunggu {rest // 60} menit {rest % 60} detik...\n")
                 time.sleep(rest)
