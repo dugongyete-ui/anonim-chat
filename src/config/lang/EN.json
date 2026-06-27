@@ -1,0 +1,39 @@
+{
+        "START": "Welcome to Anonim Chat\n\n/find find a chat partner\n/next stop current chat and find another partner\n/stop stop the chat\n/exit stop searching for a chat partner\n\n/ping check bot status\n/users current active users\n\n/contribute contribute to the project/report a bug",
+        "HELP": "/find find a chat partner\n/next stop current chat and find another partner\n/stop stop the chat\n/exit stop searching for a chat partner\n\n/contribute contribute to the project/report a bug",
+        "CONTRIBUTE": "If you'd like to contribute to the bot:\n\n- add features\n- report bugs\n- etc.\n\nYou can open a pull request or create an issue on GitHub",
+        "PING": "Pong 🏓",
+        "CREATE_ROOM": {
+                "SUCCESS_1": "Chat partner found!"
+        },
+        "FIND": {
+                "WARNING_1": "You are already in the queue",
+                "WARNING_2": "You are already in a chat",
+                "LOADING": "Searching for a partner..."
+        },
+        "NEXT": {
+                "SUCCESS_1": "You have left the conversation",
+                "SUCCESS_2": "Your partner ended the conversation",
+                "WARNING_1": "You don't have a chat partner\n\n/find to search for a chat partner"
+        },
+        "STOP": {
+                "SUCCESS_1": "You have left the conversation",
+                "SUCCESS_2": "Your partner ended the conversation",
+                "WARNING_1": "You don't have a chat partner\n\n/find to search for a chat partner"
+        },
+        "EXIT": {
+                "SUCCESS_1": "Stopped searching for a chat partner",
+                "WARNING_1": "You are not in the queue"
+        },
+        "CONNECT": {
+                "WARNING_1": "You don't have a chat partner\n\n/find to search for a chat partner"
+        },
+        "USER_SEND_PHOTO": {
+                "WARNING_1": "ℹ️INFO \nYour partner sent a photo, would you like to open it?\n\n⚠️WARNING! \nThe photo may contain inappropriate content"
+        },
+        "USER_SEND_VIDEO": {
+                "WARNING_1": "ℹ️INFO \nYour partner sent a video, would you like to open it?\n\n⚠️WARNING! \nThe video may contain inappropriate content"
+        },
+        "ACTIVE_USER": "Currently, there are ${totalUser} people using anonim-chat.\n\nQueue: ${totalUserInQueue}\nIn chat: ${totalUserInRoom}",
+        "ERROR": "Error"
+}
