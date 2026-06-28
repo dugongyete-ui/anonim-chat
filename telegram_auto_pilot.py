@@ -39,6 +39,9 @@ async def main():
         await client.send_code_request(phone)
         await client.sign_in(phone, input("Masukkan kode verifikasi dari Telegram: "))
 
+    me = await client.get_me()
+    print(f"Login sebagai: {me.first_name} (@{me.username})")
+
     # ── TAHAP 1: SCRAPING ──────────────────────────────────────────────────
     print("\n[1] TAHAP SCRAPING")
     target_url = input(
@@ -54,10 +57,10 @@ async def main():
         print(f"Gagal mengambil grup target: {e}")
         return
 
-    # Filter: hanya user yang punya username, bukan bot
+    # Filter: hanya user yang punya username, bukan bot, bukan diri sendiri
     candidates = [
         u for u in all_participants
-        if u.username and not getattr(u, 'bot', False)
+        if u.username and not getattr(u, 'bot', False) and u.id != me.id
     ]
     print(f"Kandidat yang bisa ditambahkan (punya username, bukan bot): {len(candidates)}")
 
